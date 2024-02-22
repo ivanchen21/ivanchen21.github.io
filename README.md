@@ -1,2 +1,2 @@
 # ivanchen21.github.io
-Hello CSC 225!
+Hello it's me Ivan!
