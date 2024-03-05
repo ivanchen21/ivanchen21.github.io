@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ivan - Lab 4</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            var now = new Date();
+            var hour = now.getHours();
+
+            function NewDate(date){
+                date.setDate(parseInt(date.getDate()) + 7);
+                document.writeln("<p>Your order will arrive in 7 days on <b>" + date.toLocaleDateString() + "</b><p>");
+            }
+
+            window.alert("Welcome to my Shop!");
+            var name = window.prompt("Please Enter Your Name: ", "John Smith");
+            var item = window.prompt("Item Requested: ", "Vanilla");
+            var amount = window.prompt("Amount of Items (1-99): ", "1");
+
+            if(parseInt(amount) > 99){
+                amount = 99;
+            }
+            if(parseInt(amount) < 1){
+                amount = 1;
+            }
+
+            document.writeln("<center><br><h1>-Icecream Store-</h1></center>");
+            
+            if (hour < 12) {
+                document.write("<center><h1> Good Morning, ");
+            } else if (hour < 18) {
+                document.write("<center><h1> Good Afternoon, ");
+            } else {
+                document.write("<center><h1> Good Evening, ");
+            }
+            document.writeln(name + "!</center>");
+            document.writeln("<center><h3>Order Page</h1><p>Thank you for your purchase!</center><hr>");
+            document.writeln("<p>You ordered: <b><ul><li>" + item + " (" + parseInt(amount) + ") " + "</li></ul></b></p>");
+            NewDate(now);
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
