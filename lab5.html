@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"
+        ></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,400;1,700&family=Madimi+One&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            .madimi-one-regular {
+                font-family: "Madimi One", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+            }
+        </style>
+        <script>
+            function register() {
+                var elements =
+                    document.getElementById("registration-form").elements;
+                var elemsArr1 = Array.from(elements);
+                var user = {
+                    fname: "John",
+                    lname: "Doe",
+                    email: "JohnDoe@gmail.com",
+                    password: "123!?",
+                    birthday: "1-1-1998",
+                };
+                elemsArr1.forEach((element) =>
+                    console.log(element.name + " " + element.value)
+                );
+
+                // Empty Field
+                for (var i = 0; i < elemsArr1.length; i++) {
+                    if (elemsArr1[i].value == "") {
+                        var display = document.getElementById(
+                            "display-registration"
+                        );
+                        display.style.color = "red";
+                        display.innerHTML = "Unsuccessful.";
+                        return window.alert("Entire form must be filled!");
+                        break;
+                    }
+                }
+
+                // Email and Password Verification
+                for (var i = 0; i < elemsArr1[2].value.length; i++) {
+                    var check_email = true;
+                    if (elemsArr1[2].value.charAt(i) == "@") {
+                        check_email = false;
+                        break;
+                    }
+                }
+                if (check_email) {
+                    // Invalid Email
+                    var display = document.getElementById(
+                        "display-registration"
+                    );
+                    display.style.color = "red";
+                    display.innerHTML = "Unsuccessful.";
+                    return window.alert("Invalid Email! Must include '@'");
+                }
+                for (var i = 0; i < elemsArr1[3].value.length; i++) {
+                    var check_password = true;
+                    if (
+                        elemsArr1[3].value.charAt(i) == "!" ||
+                        elemsArr1[3].value.charAt(i) == "?"
+                    ) {
+                        check_password = false;
+                        break;
+                    }
+                }
+                if (check_password) {
+                    // Invalid Password
+                    var display = document.getElementById(
+                        "display-registration"
+                    );
+                    display.style.color = "red";
+                    display.innerHTML = "Unsuccessful.";
+                    return window.alert(
+                        "Invalid Password! Must include a special character. '!' or '?'"
+                    );
+                }
+
+                // Secure Password
+                var secret_password = "";
+                for (var i = 0; i < elemsArr1[3].value.length; i++) {
+                    secret_password += "*";
+                }
+
+                // Successful Registration
+                for (var i = 0; i < elemsArr1.length; i++) {
+                    var info = elemsArr1[i];
+                    if (i == 3) {
+                        user[info.name] = secret_password;
+                    } else {
+                        user[info.name] = info.value;
+                    }
+                }
+                var display = document.getElementById("display-registration");
+                display.style.color = "green";
+                display.innerHTML =
+                    "Successful!<br>Full Name: " +
+                    user.fname +
+                    " " +
+                    user.lname +
+                    "<br>Email: " +
+                    user.email +
+                    "<br>Password: " +
+                    user.password +
+                    "<br>Date of Birth: " +
+                    user.birthday;
+            }
+        </script>
+        <title>Lab 5 - JS Registration Page</title>
+    </head>
+    <body>
+        <!-- Split Screen -->
+        <div>
+            <div class="container-fluid px-0">
+                <div class="row g-0">
+                    <br />
+                    <!-- Registration -->
+                    <div class="col-lg-5 vh-100">
+                        <div
+                            class="jumbotron jumbotron-fluid"
+                            style="
+                                background-color: #98efab;
+                                border-bottom-style: solid;
+                            "
+                        >
+                            <center class="madimi-one-regular">
+                                <img
+                                    src="images/tropical-icon.jpeg"
+                                    class="img-fluid rounded-circle"
+                                    style="
+                                        max-width: 35%;
+                                        max-height: 35%;
+                                        border-color: black;
+                                        border-style: solid;
+                                        margin-top: 30px;
+                                    "
+                                />
+                                <h1 class="display-5">Tropical Resorts</h1>
+                                <p>Sign Up & Book a Ticket Today!</p>
+                            </center>
+                        </div>
+                        <br />
+
+                        <form id="registration-form">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label><b>First Name</b></label
+                                    ><br />
+                                    <input
+                                        type="text"
+                                        name="fname"
+                                        value=""
+                                    /><br />
+                                </div>
+                                <div class="col-6">
+                                    <label><b>Last Name</b></label
+                                    ><br />
+                                    <input
+                                        type="text"
+                                        name="lname"
+                                        value=""
+                                    /><br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label><b>Email</b></label
+                                    ><br />
+                                    <input
+                                        type="text"
+                                        name="email"
+                                        value=""
+                                    /><br />
+                                </div>
+                                <div class="col-6">
+                                    <label><b>Password</b></label
+                                    ><br />
+                                    <input
+                                        type="text"
+                                        name="password"
+                                        value=""
+                                    /><br />
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label><b>Date-of-Birth</b></label
+                                ><br />
+                                <input
+                                    type="date"
+                                    name="birthday"
+                                    value=""
+                                /><br />
+                            </div>
+                        </form>
+                        <button onclick="register()">Sign Up</button>
+                        <hr />
+
+                        <div id="display-registration"></div>
+                    </div>
+
+                    <!-- Carousel -->
+                    <div
+                        class="col-lg-7 vh-100"
+                        style="
+                            background-color: #9ccdff;
+                            background-image: url('images/tropical-background1.jpeg');
+                            background-size: cover;
+                        "
+                    >
+                        <div
+                            id="carouselExampleAutoplaying"
+                            class="carousel slide carousel-fade"
+                            data-bs-ride="carousel"
+                            style="
+                                left: 10%;
+                                top: 30%;
+                                max-width: 80%;
+                                max-height: 100%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            "
+                        >
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img
+                                        src="images/maldives.jpeg"
+                                        class="d-block w-100 img-fluid rounded"
+                                        alt="Image of Maldives"
+                                        style="max-height: 500px"
+                                        ;
+                                    />
+                                    <div
+                                        class="carousel-caption d-none d-md-block"
+                                    ></div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img
+                                        src="images/spa.jpeg"
+                                        class="d-block w-100 img-fluid rounded"
+                                        alt="Image of Spa Retreat"
+                                        style="max-height: 500px"
+                                        ;
+                                    />
+                                    <div
+                                        class="carousel-caption d-none d-md-block"
+                                    >
+                                        <h5>Spa and Massage</h5>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img
+                                        src="images/seaplane.jpeg"
+                                        class="d-block w-100 img-fluid rounded"
+                                        alt="Image of Seaplane"
+                                        style="max-height: 500px"
+                                        ;
+                                    />
+                                    <div
+                                        class="carousel-caption d-none d-md-block"
+                                    >
+                                        <h5>Seaplane Adventures</h5>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img
+                                        src="images/seadiving.jpg"
+                                        class="d-block w-100 img-fluid rounded"
+                                        alt="Image of Sea Diving"
+                                        style="max-height: 500px"
+                                        ;
+                                    />
+                                    <div
+                                        class="carousel-caption d-none d-md-block"
+                                    >
+                                        <h5>Underwater Exploration</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <button
+                                class="carousel-control-prev"
+                                type="button"
+                                data-bs-target="#carouselExampleAutoplaying"
+                                data-bs-slide="prev"
+                            >
+                                <span
+                                    class="carousel-control-prev-icon"
+                                    aria-hidden="true"
+                                ></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button
+                                class="carousel-control-next"
+                                type="button"
+                                data-bs-target="#carouselExampleAutoplaying"
+                                data-bs-slide="next"
+                            >
+                                <span
+                                    class="carousel-control-next-icon"
+                                    aria-hidden="true"
+                                ></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
