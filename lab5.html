@@ -134,7 +134,10 @@
                 <div class="row g-0">
                     <br />
                     <!-- Registration -->
-                    <div class="col-lg-5 vh-100">
+                    <div
+                        class="col-lg-5 vh-100"
+                        style="background-color: #d7ebff"
+                    >
                         <div
                             class="jumbotron jumbotron-fluid"
                             style="
@@ -147,11 +150,11 @@
                                     src="images/tropical-icon.jpeg"
                                     class="img-fluid rounded-circle"
                                     style="
-                                        max-width: 35%;
-                                        max-height: 35%;
+                                        max-width: 20%;
+                                        max-height: 20%;
                                         border-color: black;
                                         border-style: solid;
-                                        margin-top: 30px;
+                                        margin-top: 20px;
                                     "
                                 />
                                 <h1 class="display-5">Tropical Resorts</h1>
@@ -160,60 +163,78 @@
                         </div>
                         <br />
 
-                        <form id="registration-form">
-                            <div class="row">
-                                <div class="col-6">
-                                    <label><b>First Name</b></label
+                        <center>
+                            <form id="registration-form">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label><b>First Name</b></label
+                                        ><br />
+                                        <input
+                                            type="text"
+                                            name="fname"
+                                            value=""
+                                        /><br />
+                                    </div>
+                                    <div class="col-6">
+                                        <label><b>Last Name</b></label
+                                        ><br />
+                                        <input
+                                            type="text"
+                                            name="lname"
+                                            value=""
+                                        /><br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label><b>Email</b></label
+                                        ><br />
+                                        <input
+                                            type="text"
+                                            name="email"
+                                            value=""
+                                        /><br />
+                                    </div>
+                                    <div class="col-6">
+                                        <label><b>Password</b></label
+                                        ><br />
+                                        <input
+                                            type="text"
+                                            name="password"
+                                            value=""
+                                        /><br />
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label><b>Date-of-Birth</b></label
                                     ><br />
                                     <input
-                                        type="text"
-                                        name="fname"
+                                        type="date"
+                                        name="birthday"
                                         value=""
                                     /><br />
                                 </div>
-                                <div class="col-6">
-                                    <label><b>Last Name</b></label
-                                    ><br />
-                                    <input
-                                        type="text"
-                                        name="lname"
-                                        value=""
-                                    /><br />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <label><b>Email</b></label
-                                    ><br />
-                                    <input
-                                        type="text"
-                                        name="email"
-                                        value=""
-                                    /><br />
-                                </div>
-                                <div class="col-6">
-                                    <label><b>Password</b></label
-                                    ><br />
-                                    <input
-                                        type="text"
-                                        name="password"
-                                        value=""
-                                    /><br />
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <label><b>Date-of-Birth</b></label
-                                ><br />
-                                <input
-                                    type="date"
-                                    name="birthday"
-                                    value=""
-                                /><br />
-                            </div>
-                        </form>
-                        <button onclick="register()">Sign Up</button>
-                        <hr />
+                            </form>
+                            <br />
+                            <button
+                                onclick="register()"
+                                style="
+                                    font-size: 14px;
+                                    line-height: 1;
+                                    border-radius: 30px;
+                                    border-style: hidden;
+                                    letter-spacing: 2px;
+                                    font-weight: 750;
+                                    text-align: center;
+                                    padding: 17px 48px;
+                                    color: floralwhite;
+                                    background-color: #1ed25d;
+                                "
+                            >
+                                SIGN UP
+                            </button>
+                            <hr />
+                        </center>
 
                         <div id="display-registration"></div>
                     </div>
