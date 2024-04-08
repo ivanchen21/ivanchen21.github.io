@@ -1,0 +1,56 @@
+/* Header Styling */
+
+/* Center navigation */
+.navbar > div.container-fluid {
+    margin-left:10%;
+    margin-right:10%;
+}
+
+.navbar-brand {
+    color: #FFDA1F;
+    font-size: 32px;
+    display: flex;               /* Center and align brand logo and name*/
+    justify-content: center;    /**/
+    align-items: center;        /**/
+}
+
+.navbar-brand > img {
+    width: 100px;
+    height: 100px; 
+}
+
+/* Spreads out navigation links */
+/* Change "navbar-expand-xl/lg/..." to adjust menu breakpoint */
+.navbar-nav > li {
+    margin-left:35px;
+    margin-right:35px;
+}
+
+/* Style link text */
+.navbar-nav > li > a {
+    color:white;
+    font-size: 20px;
+}
+
+
+
+
+/* Footer Styling */
+
+.nav-footer a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+.nav-footer > div > a > img {
+    width: 60px;
+    height: 60px;
+}
+
+.nav-footer > ul > a > img {
+    width: 75px;
+    height: 75px;
+}
