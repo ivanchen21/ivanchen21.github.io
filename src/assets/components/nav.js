@@ -8,7 +8,7 @@ class header extends HTMLElement {
         <nav class="navbar navbar-expand-xl navbar-dark bg-black">
             <div class="container-fluid">
                 <a class="navbar-brand" href="homepage.html">
-                    <img src="/assets/images/logo11.jpg" alt="space science museum logo" class="d-inline-block align-text-top rounded-pill">
+                    <img src="/src/assets/images/logo11.jpg" alt="space science museum logo" class="d-inline-block align-text-top rounded-pill">
                     <center><strong>GitScience</strong></center>
                 </a>
                 <button
@@ -68,14 +68,14 @@ class footer extends HTMLElement {
         <footer class="nav-footer bg-black d-flex flex-wrap justify-content-evenly align-items-center py-3 my-4 border-top">
             <div class="col-md-4 d-flex align-items-center">
                 <a href="homepage.html">
-                    <img src="/assets/images/logo11.jpg" alt="museum of space science logo">
+                    <img src="/src/assets/images/logo11.jpg" alt="museum of space science logo">
                     Ivan Chen
                 </a>
             </div>
 
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
                 <a href="#">
-                    <img src="/assets/images/GoTopIcon.png" alt="museum of space science logo">
+                    <img src="/src/assets/images/GoTopIcon.png" alt="museum of space science logo">
                 </a>
             </ul>
         </footer>
