@@ -1,5 +1,5 @@
 #home-jumbotron-container {
-    background-image: url(/src/assets/images/background1.jpg);
+    background-image: url(../images/background1.jpg);
     background-size: cover;
 }
 
