@@ -1,4 +1,4 @@
-class header extends HTMLElement {
+class Header extends HTMLElement {
     constructor() {
         super();
     }
@@ -55,10 +55,10 @@ class header extends HTMLElement {
 }
 
 //Must contain hyphen!
-customElements.define("navbar-header", header);
+customElements.define("navbar-header", Header);
 
 
-class footer extends HTMLElement {
+class Footer extends HTMLElement {
     constructor() {
         super();
     }
@@ -84,4 +84,4 @@ class footer extends HTMLElement {
 }
 
 //Must contain hyphen!
-customElements.define("navbar-footer", footer);
+customElements.define("navbar-footer", Footer);
