@@ -1,7 +1,7 @@
 import { fetchAPOD } from "../api/apod-api.js";
 
 // Get title, image, explanation from JSON
-export async function getAPOD() {
+async function getAPOD() {
     const result = await fetchAPOD();
     const data = {};
 
@@ -12,3 +12,5 @@ export async function getAPOD() {
 
     return data;
 }
+
+export { getAPOD };

@@ -17,14 +17,16 @@
         <link rel="stylesheet" href="../assets/styles/nav.css">
         <link rel="stylesheet" href="../assets/styles/homepage.css">
 
-        <script src="../assets/components/nav.js" type="text/javascript"></script>
-        <script src="../assets/scripts/display/apod-display.js" type="module"></script>
+        <script async src="../assets/components/nav.js" type="text/javascript"></script>
+        <script async type="module">
+            import { displayAPOD } from "../assets/scripts/display/apod-display.js";
+            window.onload = displayAPOD();
+        </script>
 
 
     </head>
     <body>
         <navbar-header></navbar-header>
-
 
         <div id="home-jumbotron-container">
             <center id="jumbo-text" class="row g-0">
@@ -38,6 +40,7 @@
                     <h1>Welcome to the Museum of Space Science!</h1>
                     <p><i>Git Edition</i></p>
                 </div>
+
                 <!-- APOD API -->
                 <div id="apod-container" class="col-4">
                     <div id="apod-body">
@@ -45,9 +48,9 @@
                     </div>
                 </div>
             </div>
+
             <marquee id="scrolling-text"><!-- APOD Caption Here --></marquee>
         </div>
-
 
         <navbar-footer></navbar-footer>
     </body>
