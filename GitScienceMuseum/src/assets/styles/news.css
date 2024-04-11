@@ -1,0 +1,36 @@
+.header-container {
+    height: 75vh;
+}
+
+.video-background {
+    object-fit: fill;
+}
+
+
+.header-content {
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+    position: relative;
+    transform: translate(30%, -600%);
+    width: fit-content;
+}
+
+.header-content h1 {
+    padding: 10px;
+}
+
+.searchbar {
+    background: rgba(0, 0, 0, 0.65);
+    position: absolute;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#media-container .grid {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto;
+    place-items: center;
+}

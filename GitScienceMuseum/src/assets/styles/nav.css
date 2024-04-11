@@ -8,15 +8,15 @@
 
 .navbar-brand {
     color: #FFDA1F;
-    font-size: 32px;
+    font-size: 28px;
     display: flex;               /* Center and align brand logo and name*/
     justify-content: center;    /**/
     align-items: center;        /**/
 }
 
 .navbar-brand > img {
-    width: 100px;
-    height: 100px; 
+    width: 65px;
+    height: 65px; 
 }
 
 /* Spreads out navigation links */
