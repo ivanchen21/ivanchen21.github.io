@@ -2,56 +2,59 @@ import { getRecent } from "../controller/nasa-library-search.js";
 
 async function displayRecent() {
     const result = await getRecent();
-    const content = document.getElementById("media-container");
-
+    const content = document.getElementById("media");
     console.log(result);
-    var n = result.length;
 
-    
-    // for(let i = 0; i < n; i++){
-    //     content.innerHTML += result[i].title;
-    //     content.innerHTML += "<br>";
-    //     content.innerHTML += result[i].image;
-    //     content.innerHTML += "<br>";
-    //     content.innerHTML += result[i].photographer;
-    //     content.innerHTML += "<br>";
-    //     content.innerHTML += result[i].nasa_id;
-    //     content.innerHTML += "<br>";
-    //     content.innerHTML += result[i].media_type;
-    //     content.innerHTML += "<br>";
-    //     if(result[i].keyword){
-    //         for(let j = 0; j < result[i].keyword.length; j++){
-    //             content.innerHTML += result[i].keyword[j];
-    //         }
-    //     }
-    //     content.innerHTML += "<br>";
-    //     content.innerHTML += "<hr>";
+    var news_id = 0;
+    var item_id = 0;
 
+    content.innerHTML = '';
 
-    content.innerHTML += `
-        <div class="media">
-            <h3>${result.items[0].title}</h3>
-            <div class="grid">
+    // Display Media with shared titles first
+    for(let i = 0; i < result.titles.length; i++) {
+        content.innerHTML +=`
+            <div id="news-${news_id++}" class="news-group">
+                <h3>${result.titles[i].title}</h3>
+                <div class="grid">
 
-                <div class="item">
-                    <img>
-                    <div>description info</div>
-                    <div>${result.items[0].photographer}</div>
                 </div>
-                <div class="item">
-                    <img>
-                    <div>description info</div>
-                    <div>${result.items[1].photographer}</div>
-                </div>
-                <div class="item">
-                    <img>
-                    <div>description info</div>
-                    <div>${result.items[2].photographer}</div>
-                </div>
-
             </div>
-        </div>
-    `
+        `
+
+        for(let j = 0; j < result.groups[i].length; j++){
+            var news_container_id = `news-${news_id - 1}`;
+            var news_container = document.getElementById(news_container_id);
+            var grid_container = news_container.querySelector(".grid");
+
+            grid_container.innerHTML +=`
+                <div class="item-${item_id++} group-item-content">
+                    <img src="${result.groups[i][j].image}" alt="image for ${result.groups[i][j].title}">
+                    <div>
+                        <div>description info</div>
+                        <div>${result.groups[i][j].photographer}</div>
+                    </div>
+                </div>
+            `
+        }
+    }
+
+    // Display extra media separated
+    if(result.extras.length){
+        content.innerHTML +=`
+            <div id="extras-container">
+                <div class="grid">
+
+                </div>
+            </div>
+        `
+    }
+    for(let i = 0; i < result.extras.length; i++){
+        var extras_container = document.getElementById("extras-container");
+        var grid_container = extras_container.querySelector(".grid");
+        grid_container.innerHTML +=`
+            <img src="${result.extras[i].image}" alt="image for ${result.extras[i].title}">
+        `
+    }
 }
 
 export { displayRecent };
