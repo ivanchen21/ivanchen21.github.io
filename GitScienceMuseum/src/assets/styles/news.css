@@ -19,7 +19,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background: #a99b9b;     /* Simulate different contrasts on video background */
+    /*background: #a99b9b;     /* Simulate different contrasts on video background */
     mix-blend-mode: overlay;   /* */
 
 }
