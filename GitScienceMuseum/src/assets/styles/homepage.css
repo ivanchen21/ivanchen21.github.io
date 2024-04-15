@@ -55,18 +55,26 @@
 #apod-container {
     margin: 30px;
     padding: 10px;
+    height: auto;
 }
 
 #apod-body {
     background-color: white;
     margin: 10px;
     padding: 10px;
+    height: 100%;
 }
 
 #apod-body img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+#apod-body iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 #scrolling-text {
@@ -76,3 +84,31 @@
     margin-bottom: 15px;
     padding: 5px;
 }
+
+.main-container {
+    background-color: whitesmoke;
+}
+
+.main-container .topic {
+    color: white;
+    background-color: black;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 60%;
+    border: solid red 5px;
+}
+
+.main-container .topic .left {
+    width: 50%;
+}
+
+.main-container .topic .right {
+    width: 50%;
+}
+
+.main-container img {
+    width: 100%;
+    height: 100%;
+}
+

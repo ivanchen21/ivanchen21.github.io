@@ -1,60 +1,87 @@
-import { getRecent } from "../controller/nasa-library-search.js";
+import { getRecent, getUserSearch } from "../controller/nasa-library-search.js";
 
-async function displayRecent() {
-    const result = await getRecent();
-    const content = document.getElementById("media");
+function displayNews(result){
     console.log(result);
+    displayTopics(result);
+    displayExtras(result);
+}
+
+function displayTopics(obj){
+    const content = document.getElementById("media");
+    content.innerHTML = '';
 
     var news_id = 0;
     var item_id = 0;
 
-    content.innerHTML = '';
-
     // Display Media with shared titles first
-    for(let i = 0; i < result.titles.length; i++) {
+    for(let i = 0; i < obj.titles.length; i++) {
         content.innerHTML +=`
             <div id="news-${news_id++}" class="news-group">
-                <h3>${result.titles[i].title}</h3>
+                <h2>${obj.titles[i].title}</h2>
                 <div class="grid">
 
                 </div>
             </div>
         `
 
-        for(let j = 0; j < result.groups[i].length; j++){
+        for(let j = 0; j < obj.groups[i].length; j++){
             var news_container_id = `news-${news_id - 1}`;
             var news_container = document.getElementById(news_container_id);
             var grid_container = news_container.querySelector(".grid");
 
             grid_container.innerHTML +=`
-                <div class="item-${item_id++} group-item-content">
-                    <img src="${result.groups[i][j].image}" alt="image for ${result.groups[i][j].title}">
+                <div class="item-${item_id++} item-content">
                     <div>
-                        <div>description info</div>
-                        <div>${result.groups[i][j].photographer}</div>
+                    <img src="${obj.groups[i][j].image}" alt="image for ${obj.groups[i][j].title}">
                     </div>
+                    <section>
+                        <p>${obj.groups[i][j].description}</p>
+                        <div>${obj.groups[i][j].photographer}</div>
+                    </section>
                 </div>
             `
         }
     }
 
-    // Display extra media separated
-    if(result.extras.length){
-        content.innerHTML +=`
-            <div id="extras-container">
-                <div class="grid">
+}
 
-                </div>
+function displayExtras(obj){
+    const content = document.getElementById("media");
+    // Display extra media separated
+    if(obj.extras.length){
+        content.innerHTML +=`
+            <div id="extras-container" class="row">
+
             </div>
         `
     }
-    for(let i = 0; i < result.extras.length; i++){
+
+    var column_counter = 0;
+    for(let i = 0; i < obj.extras.length; i++){
         var extras_container = document.getElementById("extras-container");
-        var grid_container = extras_container.querySelector(".grid");
-        grid_container.innerHTML +=`
-            <img src="${result.extras[i].image}" alt="image for ${result.extras[i].title}">
+        extras_container.innerHTML +=`
+            <div class="item-content col-2">
+                <div>
+                    <img src="${obj.extras[i].image}" alt="image for ${obj.extras[i].title}">
+                </div>
+            </div>
         `
+        column_counter++;
+        if(column_counter % 6 == 0){
+            column_counter = 0;
+        }
     }
 }
 
-export { displayRecent };
+async function displayRecent() {
+    const result = await getRecent();
+    displayNews(result);
+}
+
+
+async function displayUserSearch(input){
+    const result = await getUserSearch(input);
+    displayNews(result);
+}
+
+export { displayRecent, displayUserSearch };

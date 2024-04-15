@@ -36,8 +36,8 @@ class Header extends HTMLElement {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="gallery.html">
-                                Gallery
+                            <a class="nav-link" aria-current="page" href="solar-system.html">
+                                Solar System
                             </a>
                         </li>
                         <li class="nav-item">
@@ -65,7 +65,7 @@ class Footer extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = `
-        <footer class="nav-footer bg-black d-flex flex-wrap justify-content-evenly align-items-center py-3 my-4">
+        <footer class="nav-footer bg-black d-flex flex-wrap justify-content-evenly align-items-center py-3">
             <div class="col-md-4 d-flex align-items-center">
                 <a href="homepage.html">
                     <img src="../assets/images/logo11.jpg" alt="museum of space science logo">
