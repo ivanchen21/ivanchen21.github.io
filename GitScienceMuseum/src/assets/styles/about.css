@@ -1,0 +1,54 @@
+.split-screen {
+    position: relative;
+    width: 100%;
+    height: 88%;
+}
+
+.split-screen .left {
+    position: relative;
+    width: 100%;
+    height: 40%;
+    background-color: #d9a06e;
+    color: white;
+    z-index: 3;
+}
+
+.left h1 {
+    padding: 30px;
+    font-size: 30px;
+}
+
+.left section {
+    padding: 30px;
+    font-size: 24px;
+}
+
+.split-screen .right {
+    width: 100%;
+    height: 60%;
+    background-color: #a57b5d;
+    align-items: flex-end;
+}
+
+/* https://www.shapedivider.app/ */
+.custom-shape-divider-top-1713679951 {
+    position: absolute;
+    top: 35%;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1713679951 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 297px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-top-1713679951 .shape-fill {
+    fill: #d9a06e;
+    z-index: 2;
+}

@@ -1,4 +1,4 @@
-import { fetchRecent, fetchUserSearch } from "../api/nasa-library-api.js";
+import { fetchRecent, fetchPopular, fetchUserSearch } from "../api/nasa-library-api.js";
 
 // Get specific information: title, image, photographer, nasa_id, media_type, keywords...
 function processObjectData(obj){
@@ -51,18 +51,21 @@ function processObjectData(obj){
                 temp.image = obj.collection.items[i].links[0].href;
             } 
             else temp.image = "N/A";
+
+            if(obj.collection.items[i].data[0].description){
+                temp.description = obj.collection.items[i].data[0].description;
+            } else temp.description = "N/A";
         }
         else{
             temp.image = "../assets/images/audio-nasa.jpeg";
+            if(obj.collection.items[i].data[0].description_508){
+                temp.description = obj.collection.items[i].data[0].description_508;
+            }
         }
 
         if(obj.collection.items[i].data[0].photographer){
             temp.photographer = obj.collection.items[i].data[0].photographer;
         } else temp.photographer = "N/A";
-
-        if(obj.collection.items[i].data[0].description){
-            temp.description = obj.collection.items[i].data[0].description;
-        }
 
         if(obj.collection.items[i].data[0].nasa_id){
             temp.nasa_id = obj.collection.items[i].data[0].nasa_id;
@@ -115,11 +118,75 @@ function refineObjectData(obj){
     return restructured_data;
 }
 
+function getQueryParameters(query, filter){
+    var data = {};
+
+    if (query[0].value.trim() != "") {
+        data.q = query[0].value;
+    }
+    else{
+        data.q = "";    //Empty q parameter gives news alphabetically (audio type first)
+    }
+
+    var image_box = filter[0].checked;
+    var video_box = filter[1].checked;
+    var audio_box = filter[2].checked;
+
+    if(image_box && video_box  && audio_box){
+        data.media_type = "image,video,audio";
+    }
+    else if((!image_box && !video_box  && !audio_box)){
+        data.media_type = "";
+    }
+    else if(image_box && !video_box && !audio_box){
+        data.media_type = "image";
+    }
+    else if(!image_box && video_box && !audio_box){
+        data.media_type = "video";
+    }
+    else if(!image_box && !video_box && audio_box){
+        data.media_type = "audio";
+    }
+    else if(image_box && video_box && !audio_box){
+        data.media_type = "image,video";
+    }
+    else if(image_box && !video_box && audio_box){
+        data.media_type = "image,audio";
+    }
+    else if(!image_box && video_box && audio_box){
+        data.media_type = "video,audio";
+    }
+
+    data.page_size = filter[3].value;
+
+    let start = filter[4].value;
+    let end = filter[5].value;
+    if(end < start){
+        let temp = start;
+        start = end;
+        end = temp;
+    }
+    data.year_start = start;
+    data.year_end = end;
+
+    //console.log(data);
+    return data;
+}
+
+
 // Simplify and get recent news
 // Get the title, image/video, photographer, nasa_id, media_type, keywords
 // Group news with the same title
 async function getRecent() {
     const result = await fetchRecent();
+    const data = processObjectData(result);
+    const refined_data = refineObjectData(data);
+
+    return refined_data;
+}
+
+async function getPopular() {
+    const result = await fetchPopular();
     const data = processObjectData(result);
     const refined_data = refineObjectData(data);
 
@@ -136,4 +203,4 @@ async function getUserSearch(input){
 }
 
 
-export { getRecent, getUserSearch };
+export { getRecent, getPopular, getUserSearch, getQueryParameters };

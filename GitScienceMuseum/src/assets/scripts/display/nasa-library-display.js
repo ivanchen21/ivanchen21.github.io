@@ -1,7 +1,14 @@
-import { getRecent, getUserSearch } from "../controller/nasa-library-search.js";
+import { getRecent, getPopular, getUserSearch } from "../controller/nasa-library-search.js";
 
 function displayNews(result){
-    console.log(result);
+    //console.log(result);
+
+    // HTML for No Results
+    if(result.groups.length == 0 && result.extras.length == 0){
+        const content = document.getElementById("media");
+        content.innerHTML = "No Results";
+        return;
+    }
     displayTopics(result);
     displayExtras(result);
 }
@@ -18,10 +25,12 @@ function displayTopics(obj){
         content.innerHTML +=`
             <div id="news-${news_id++}" class="news-group">
                 <h2>${obj.titles[i].title}</h2>
+                <hr>
                 <div class="grid">
 
                 </div>
             </div>
+            <br>
         `
 
         for(let j = 0; j < obj.groups[i].length; j++){
@@ -34,42 +43,59 @@ function displayTopics(obj){
                     <div>
                     <img src="${obj.groups[i][j].image}" alt="image for ${obj.groups[i][j].title}">
                     </div>
-                    <section>
-                        <p>${obj.groups[i][j].description}</p>
-                        <div>${obj.groups[i][j].photographer}</div>
-                    </section>
+
+
                 </div>
             `
         }
     }
-
+                    // <section>
+                    //     <p>${obj.groups[i][j].description}</p>
+                    //     <div><b>${obj.groups[i][j].photographer}</b></div>
+                    // </section>
 }
 
+// Display extra media separately using bootstrap + masonry
 function displayExtras(obj){
     const content = document.getElementById("media");
-    // Display extra media separated
     if(obj.extras.length){
         content.innerHTML +=`
-            <div id="extras-container" class="row">
-
+            <div id="extras-container" class="row g-0" data-masonry='{"percentPosition": true }'>
+                <center><h1><b>Gallery</b></h1></center>
             </div>
         `
-    }
-
-    var column_counter = 0;
-    for(let i = 0; i < obj.extras.length; i++){
         var extras_container = document.getElementById("extras-container");
-        extras_container.innerHTML +=`
-            <div class="item-content col-2">
-                <div>
-                    <img src="${obj.extras[i].image}" alt="image for ${obj.extras[i].title}">
+
+        var num_of_columns = 4;
+        var column_id = 0;
+
+        // Create X amount of columns
+        for(let i = 0; i < num_of_columns; i++){
+            extras_container.innerHTML +=`
+                <div id="column-${i}" class="col-3">
+                
                 </div>
-            </div>
-        `
-        column_counter++;
-        if(column_counter % 6 == 0){
-            column_counter = 0;
+            `
         }
+        
+
+        column_id = 0;
+
+        for(let i = 0; i < obj.extras.length; i++){
+            var column = `column-${column_id++}`
+            var column_container = document.getElementById(column);
+            column_container.innerHTML +=`
+                <div class="item-content">
+                    <div>
+                        <img src="${obj.extras[i].image}" alt="image for ${obj.extras[i].title}">
+                    </div>
+                </div>
+            `
+
+            if(column_id >= num_of_columns){
+                column_id = 0;
+            }
+        } 
     }
 }
 
@@ -78,10 +104,14 @@ async function displayRecent() {
     displayNews(result);
 }
 
+async function displayPopular() {
+    const result = await getPopular();
+    displayNews(result);
+}
 
 async function displayUserSearch(input){
     const result = await getUserSearch(input);
     displayNews(result);
 }
 
-export { displayRecent, displayUserSearch };
+export { displayRecent, displayPopular, displayUserSearch };
