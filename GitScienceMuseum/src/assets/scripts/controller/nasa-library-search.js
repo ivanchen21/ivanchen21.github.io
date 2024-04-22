@@ -1,6 +1,7 @@
-import { fetchRecent, fetchPopular, fetchUserSearch } from "../api/nasa-library-api.js";
+import { fetchRecent, fetchPopular, fetchUserSearch, fetchByNasaID, fetchAsset } from "../api/nasa-library-api.js";
 
-// Get specific information: title, image, photographer, nasa_id, media_type, keywords...
+// title, image, nasa_id, media_type
+// For displaying general information
 function processObjectData(obj){
     let result = {};
     result.titles = [];
@@ -9,13 +10,11 @@ function processObjectData(obj){
     // Number of items
     var n = obj.collection.items.length;
 
-
     var title_id = -1;
 
     for (let i = 0; i < n; i++) {
         let temp = {};
         temp.group = -1;
-
 
         // Ensure key exists before assigning
         if(obj.collection.items[i].data[0].title)
@@ -51,42 +50,23 @@ function processObjectData(obj){
                 temp.image = obj.collection.items[i].links[0].href;
             } 
             else temp.image = "N/A";
-
-            if(obj.collection.items[i].data[0].description){
-                temp.description = obj.collection.items[i].data[0].description;
-            } else temp.description = "N/A";
         }
         else{
             temp.image = "../assets/images/audio-nasa.jpeg";
-            if(obj.collection.items[i].data[0].description_508){
-                temp.description = obj.collection.items[i].data[0].description_508;
-            }
         }
-
-        if(obj.collection.items[i].data[0].photographer){
-            temp.photographer = obj.collection.items[i].data[0].photographer;
-        } else temp.photographer = "N/A";
 
         if(obj.collection.items[i].data[0].nasa_id){
             temp.nasa_id = obj.collection.items[i].data[0].nasa_id;
         } else temp.nasa_id = "N/A";
-            
-
-        if(obj.collection.items[i].data[0].keywords) {
-            var m = obj.collection.items[i].data[0].keywords.length;
-            temp.keywords = [];
-            for(let j = 0; j < m; j++){
-                temp.keywords[j] = obj.collection.items[i].data[0].keywords[j];
-            }
-        } else temp.keywords = ["N/A"];
 
         result.items[i] = temp;
     }
-    //console.log(data);
+    //console.log(result);
     return result;
 }
 
-// Restructure object: Group unique titles, shared titles
+// Rearrange object
+// Restructure object: Group unique titles together, shared titles together
 function refineObjectData(obj){
     var restructured_data = {};
     restructured_data.titles = [];
@@ -118,6 +98,7 @@ function refineObjectData(obj){
     return restructured_data;
 }
 
+// Get the search filter inputs as object
 function getQueryParameters(query, filter){
     var data = {};
 
@@ -173,10 +154,7 @@ function getQueryParameters(query, filter){
     return data;
 }
 
-
-// Simplify and get recent news
-// Get the title, image/video, photographer, nasa_id, media_type, keywords
-// Group news with the same title
+// fetch API -> Get specific data -> Pass info to display function
 async function getRecent() {
     const result = await fetchRecent();
     const data = processObjectData(result);
@@ -184,7 +162,6 @@ async function getRecent() {
 
     return refined_data;
 }
-
 async function getPopular() {
     const result = await fetchPopular();
     const data = processObjectData(result);
@@ -192,8 +169,6 @@ async function getPopular() {
 
     return refined_data;
 }
-
-
 async function getUserSearch(input){
     const result = await fetchUserSearch(input);
     const data = processObjectData(result);
@@ -202,5 +177,93 @@ async function getUserSearch(input){
     return refined_data;
 }
 
+// Get detailed data for news-details.html page
+// title, media_type, image, description, photographer, nasa_id, keywords, date_created, center
+async function getNewsDetails(nasa_id){
+    const obj = await fetchByNasaID(nasa_id);
+    let result = {};
 
-export { getRecent, getPopular, getUserSearch, getQueryParameters };
+    // Searching by nasa_id can still fetch more than one item!!!
+    var n = obj.collection.items.length;
+
+    if(n != 0){
+        let temp = {};
+
+        if(obj.collection.items[0].data[0].title) {
+            temp.title = obj.collection.items[0].data[0].title;
+        }
+
+        if(obj.collection.items[0].data[0].media_type){
+            temp.media_type = obj.collection.items[0].data[0].media_type;
+        } else temp.media_type = "N/A";
+
+
+
+        
+        // Get either image, audio, or video file by calling assets api
+        // https://images-api.nasa.gov/asset/{nasa_id}
+        const asset_obj = await fetchAsset(nasa_id);
+        let number_of_assets = asset_obj.collection.items.length;
+
+        if (number_of_assets > 0) {
+            for (let i = 0; i < number_of_assets; i++) {
+                let href = asset_obj.collection.items[i].href;
+
+                if (temp.media_type == "image" && (href.includes('.jpg') || href.includes('.png') || href.includes('.jpeg'))) {
+                    temp.href = href;
+                    break;
+                }
+                if (temp.media_type == "video" && href.includes('.mp4')) {
+                    temp.href = href;
+                    break;
+                }
+                if (temp.media_type == "audio" && (href.includes('.mp3') || href.includes('.wav') || href.includes('.mp4'))) {
+                    temp.href = href;
+                    break;
+                }
+            }
+        } else temp.href = "N/A";
+
+
+
+
+        if(obj.collection.items[0].data[0].description){
+            temp.description = obj.collection.items[0].data[0].description;
+        } else temp.description = "N/A";
+
+        if(obj.collection.items[0].data[0].photographer){
+            temp.photographer = obj.collection.items[0].data[0].photographer;
+        } else temp.photographer = "N/A";
+
+        if(obj.collection.items[0].data[0].nasa_id){
+            temp.nasa_id = obj.collection.items[0].data[0].nasa_id;
+        } else temp.nasa_id = "N/A";
+
+        if(obj.collection.items[0].data[0].center){
+            temp.center = obj.collection.items[0].data[0].center;
+        } else temp.center = "N/A";
+
+        if(obj.collection.items[0].data[0].date_created){
+            temp.date_created = obj.collection.items[0].data[0].date_created;
+        } else temp.date_created = "N/A";
+            
+
+        if(obj.collection.items[0].data[0].keywords) {
+            var m = obj.collection.items[0].data[0].keywords.length;
+            temp.keywords = [];
+            for(let j = 0; j < m; j++){
+                temp.keywords[j] = obj.collection.items[0].data[0].keywords[j];
+            }
+        } else temp.keywords = ["N/A"];
+
+        result = temp;
+    }
+    else {
+        console.log("No items to fetch.")
+    }
+    //console.log(result);
+    return result;
+}
+
+
+export { getRecent, getPopular, getUserSearch, getQueryParameters, getNewsDetails };

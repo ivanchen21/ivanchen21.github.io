@@ -28,4 +28,16 @@ async function fetchUserSearch(user_input) {
     return data;
 }
 
-export { fetchRecent, fetchPopular, fetchUserSearch };
+async function fetchByNasaID(nasa_id){
+    const url = `https://images-api.nasa.gov/search?nasa_id=${nasa_id}`;
+    const data = await fetchAPI(url);
+    return data;
+}
+
+async function fetchAsset(nasa_id){
+    const url = `https://images-api.nasa.gov/asset/${nasa_id}`;
+    const data = await fetchAPI(url);
+    return data;
+}
+
+export { fetchRecent, fetchPopular, fetchUserSearch, fetchByNasaID, fetchAsset };

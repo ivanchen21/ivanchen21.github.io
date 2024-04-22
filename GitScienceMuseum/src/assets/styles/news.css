@@ -7,7 +7,6 @@
     display: block;
     position: relative;
     height: auto;
-    max-height: 88vh;
 }
 
 .video-background {
@@ -141,6 +140,10 @@
     position: relative;
     margin: 5px;
 }
+#filter-container input[type="checkbox"] {
+    width: 12%;
+    height: 12%;
+}
 #filter-container input[type="range"] {
     width: 65%;
 }
@@ -256,6 +259,12 @@
     width: auto;
     height: auto;
     padding: 1.2vh;
+}
+
+#extras-container .item-content a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9vw;
 }
 
 #extras-container .item-content div {

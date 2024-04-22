@@ -1,0 +1,108 @@
+.main-content {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.left {
+    width: 50%;
+    background-color: rgb(82 82 82);
+}
+#art-piece {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+#art-label {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.plaque {
+    color: #020202;
+    /* https://codepen.io/chilliconcode/pen/OWxqYR */
+    background: radial-gradient(ellipse farthest-corner at right bottom, #caad2b 0%, #d79d2a 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+                radial-gradient(ellipse farthest-corner at left top, #d9d6d6 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #6a5525 100%);
+    padding: 1%;
+    min-width: 45%;
+    text-align: center;
+    border: solid 5px;
+}
+
+
+
+.right {
+    width: 50%;
+    background-color: rgb(27, 26, 26);
+}
+.art-description {
+    background-color: rgb(41, 39, 39);
+}
+
+
+
+/* https://codepen.io/chris22smith/pen/PbBwjp */
+/* Picture Frame Styling */
+.frame {
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-bottom: 20px;
+    width: auto;
+    height: 400px;
+    background-color:rgb(145, 111, 84);
+    border:solid 5vmin;
+    border-bottom-color: #6e4119;
+    border-left-color:#5c3716;
+    border-radius:2px;
+    border-right-color:#5c3716;
+    border-top-color:#4d2c0f;
+    box-shadow: 0 0 100px #cac5c566,
+                0 0 200px #ffffff6a,
+                0 0 300px #ffffff36,
+                0 0 400px #ffffff1b;
+    box-sizing:border-box;
+    display:inline-block;
+    position:relative;
+    text-align:center;
+    &:before {
+      border-radius:2px;
+      bottom:-2vmin;
+      box-shadow:0 2px 5px 0 rgba(0,0,0,.25) inset;
+      content:"";
+      left:-2vmin;
+      position:absolute;
+      right:-2vmin;
+      top:-2vmin;
+    }
+    &:after {
+      border-radius:2px;
+      bottom:-2.5vmin;
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,.25);
+      content:"";
+      left:-2.5vmin;
+      position:absolute;
+      right:-2.5vmin;
+      top:-2.5vmin;
+    }
+}
+
+
+.frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.frame video {
+    height: 100%;
+    position: relative;
+    display: block;
+    z-index: 5;
+    object-fit: inherit;
+}

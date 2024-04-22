@@ -37,11 +37,8 @@
                 // query.forEach((element) =>
                 //     console.log(element.name + " " + element.value)
                 // );
-                // filter.forEach((element) =>
-                //     console.log(element.name + " " + element.value)
-                // );
 
-                // Get and pass query parameters for search API
+                // Get and pass url parameters for search API
                 var data = getQueryParameters(query, filter);
 
                 displayUserSearch(data);
@@ -132,7 +129,7 @@
                                 <label for="video">Videos</label>
                                 <br>
                                 <br>
-                                <input type="checkbox" id="audio" name="audio" checked>
+                                <input type="checkbox" id="audio" name="audio">
                                 <label for="audio">Audios</label>
                                 <br>
                             </section>
@@ -142,8 +139,8 @@
                                 <h4>NEWS AMOUNT</h4>
                                 <hr>
                                 <label for="page_size">Number of News Items (1 - 100)</label>
-                                <input type="range" id="page_size" name="page_size" value="25" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
-                                <output>25</output>
+                                <input type="range" id="page_size" name="page_size" value="50" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
+                                <output>50</output>
                                 <br>
                             </section>
 

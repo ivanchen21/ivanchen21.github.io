@@ -1,7 +1,7 @@
-import { getRecent, getPopular, getUserSearch } from "../controller/nasa-library-search.js";
+import { getRecent, getPopular, getUserSearch, getNewsDetails } from "../controller/nasa-library-search.js";
 
 function displayNews(result){
-    //console.log(result);
+    console.log(result);
 
     // HTML for No Results
     if(result.groups.length == 0 && result.extras.length == 0){
@@ -39,20 +39,14 @@ function displayTopics(obj){
             var grid_container = news_container.querySelector(".grid");
 
             grid_container.innerHTML +=`
-                <div class="item-${item_id++} item-content">
-                    <div>
-                    <img src="${obj.groups[i][j].image}" alt="image for ${obj.groups[i][j].title}">
+                <a href="news-details.html?nasa_id=${obj.groups[i][j].nasa_id}" class="item-${item_id++} item-content">
+                    <div id="${obj.groups[i][j].nasa_id}">
+                        <img src="${obj.groups[i][j].image}" alt="image for ${obj.groups[i][j].title}">
                     </div>
-
-
-                </div>
+                </a>
             `
         }
     }
-                    // <section>
-                    //     <p>${obj.groups[i][j].description}</p>
-                    //     <div><b>${obj.groups[i][j].photographer}</b></div>
-                    // </section>
 }
 
 // Display extra media separately using bootstrap + masonry
@@ -84,11 +78,24 @@ function displayExtras(obj){
         for(let i = 0; i < obj.extras.length; i++){
             var column = `column-${column_id++}`
             var column_container = document.getElementById(column);
+
+            // Provide text for imageless audio
+            var image;
+            if(obj.extras[i].media_type != "audio"){
+                image = '';
+            }
+            else{
+                image = `<i>${obj.extras[i].title}</i>`; 
+            }
+
             column_container.innerHTML +=`
                 <div class="item-content">
-                    <div>
-                        <img src="${obj.extras[i].image}" alt="image for ${obj.extras[i].title}">
-                    </div>
+                    <a href="news-details.html?nasa_id=${obj.extras[i].nasa_id}">
+                        <div id="${obj.extras[i].nasa_id}">
+                            <img src="${obj.extras[i].image}" alt="image for ${obj.extras[i].title}">
+                            ${image}
+                        </div>
+                    </a>
                 </div>
             `
 
@@ -98,6 +105,11 @@ function displayExtras(obj){
         } 
     }
 }
+
+
+
+
+
 
 async function displayRecent() {
     const result = await getRecent();
@@ -114,4 +126,42 @@ async function displayUserSearch(input){
     displayNews(result);
 }
 
-export { displayRecent, displayPopular, displayUserSearch };
+
+// Passes data to different page using url parameter
+async function displayNewsDetails(nasa_id){
+    const result = await getNewsDetails(nasa_id);
+    console.log(result);
+
+    const piece = document.getElementById("art-piece");
+    const picture = piece.querySelector(".frame");
+
+    if(result.media_type == "image"){
+        picture.innerHTML = `
+            <img src="${result.href}" alt="${result.title}" />
+        `
+    }
+    if(result.media_type == "video"){
+        picture.innerHTML = `
+            <video width="100%" controls muted>
+                <source src="${result.href}">
+                Your browser does not support the video tag.
+            </video>
+        `
+    }
+    if(result.media_type == "audio"){
+        picture.innerHTML = `
+            <video width="100%" controls muted>
+                <source src="${result.href}">
+                Your browser does not support the video tag.
+            </video>
+        `
+    }
+
+    const label = document.getElementById("art-label");
+    const plaque = label.querySelector(".plaque");
+    plaque.innerHTML =`${result.title}`
+    
+
+}
+
+export { displayRecent, displayPopular, displayUserSearch, displayNewsDetails };
