@@ -14,9 +14,11 @@
         <!-- Font Awesome CDN -->
         <script src="https://kit.fontawesome.com/5f828cea14.js" crossorigin="anonymous"></script>
 
+        <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
 
         <link rel="stylesheet" href="../assets/styles/style.css">
         <link rel="stylesheet" href="../assets/styles/nav.css">
@@ -27,26 +29,34 @@
             import { displayRecent, displayPopular, displayUserSearch } from "../assets/scripts/display/nasa-library-display.js";
             import { getQueryParameters } from "../assets/scripts/controller/nasa-library-search.js";
 
+            // Search on enter
+            function searchOnEnter(event){
+                if(event.key == "Enter"){
+                    event.preventDefault();
+                    search();
+                }
+            }
+
+            // Get and pass form inputs as url parameters for search API
             function search(){
                 let query_form = document.getElementById("search-query").elements;
                 let filter_form = document.getElementById("filter-form").elements;
 
                 let query = Array.from(query_form);
                 let filter = Array.from(filter_form).filter(element => element.type != "output");
-
                 // query.forEach((element) =>
                 //     console.log(element.name + " " + element.value)
                 // );
-
-                // Get and pass url parameters for search API
                 var data = getQueryParameters(query, filter);
 
                 displayUserSearch(data);
             }
 
-            // Search button listeners
+            // Event listeners
             const searchButton = document.getElementById("search-button");
+            const searchInput = document.getElementById("search-input");
             searchButton.addEventListener("click", search);
+            searchInput.addEventListener("keydown", searchOnEnter);
 
             const media_container = document.getElementById("media-container");
             const recent_button = media_container.querySelector(".recent-button");
@@ -91,7 +101,7 @@
                     <!-- Search Bar -->
                     <div class="searchbar">
                         <form id="search-query">
-                            <input placeholder="Search NASA Image and Video Library" type="text" name="query" value="">
+                            <input id="search-input" placeholder="Search NASA Image and Video Library" type="text" name="query" value="">
                         </form>
                         <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
@@ -174,13 +184,12 @@
                 </div>
 
                 <div id="media">
-                    CONTENT GOES HERE
+                    <div class="results">
+                        <h2>Start typing to search, it will show up here!</h2>
+                    </div>
                 </div>
             </div>
         </main>
-
-
-
 
         <navbar-footer></navbar-footer>
     </body>

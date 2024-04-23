@@ -1,14 +1,49 @@
 .main-content {
     width: 100%;
     min-height: 100%;
+    height: 100%;
     display: flex;
     flex-wrap: wrap;
 }
 
 .left {
     width: 50%;
+    height: 100%;
     background-color: rgb(82 82 82);
 }
+.right {
+    width: 50%;
+    height: 100%;
+    max-height: 100%;
+    background-color: rgb(27, 26, 26);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Media Queries for Responsive Layout */
+@media only screen and (max-width: 800px) {
+    .main-content {
+        width: 100%;
+        height: 100%;        
+        min-height: 100%;
+    }
+    .left {
+        width: 100%;
+        height: 50%;
+        background-color: rgb(82 82 82);
+    }
+    .right {
+        width: 100%;
+        height: 50%;
+        max-height: 100%;
+        background-color: rgb(27, 26, 26);
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 #art-piece {
     width: 100%;
     height: 80%;
@@ -18,7 +53,7 @@
 }
 #art-label {
     width: 100%;
-    height: 30%;
+    height: 20%;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -36,73 +71,62 @@
 }
 
 
-
-.right {
-    width: 50%;
-    background-color: rgb(27, 26, 26);
-}
-.art-description {
-    background-color: rgb(41, 39, 39);
-}
-
-
-
-/* https://codepen.io/chris22smith/pen/PbBwjp */
-/* Picture Frame Styling */
+/* Art Exibit Frame Styling */
 .frame {
-    margin-left: 5vw;
-    margin-right: 5vw;
-    margin-bottom: 20px;
-    width: auto;
-    height: 400px;
     background-color:rgb(145, 111, 84);
-    border:solid 5vmin;
-    border-bottom-color: #6e4119;
-    border-left-color:#5c3716;
-    border-radius:2px;
-    border-right-color:#5c3716;
-    border-top-color:#4d2c0f;
+    width: auto;
+    height: 80%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 4vh;
+    border: solid 2.75vh;
+    border-radius: 3px;
+    border-color: #4d2c0f #5c3716 #6e4119 #5c3716;
     box-shadow: 0 0 100px #cac5c566,
                 0 0 200px #ffffff6a,
                 0 0 300px #ffffff36,
                 0 0 400px #ffffff1b;
-    box-sizing:border-box;
-    display:inline-block;
-    position:relative;
-    text-align:center;
-    &:before {
-      border-radius:2px;
-      bottom:-2vmin;
-      box-shadow:0 2px 5px 0 rgba(0,0,0,.25) inset;
-      content:"";
-      left:-2vmin;
-      position:absolute;
-      right:-2vmin;
-      top:-2vmin;
-    }
-    &:after {
-      border-radius:2px;
-      bottom:-2.5vmin;
-      box-shadow: 0 2px 5px 0 rgba(0,0,0,.25);
-      content:"";
-      left:-2.5vmin;
-      position:absolute;
-      right:-2.5vmin;
-      top:-2.5vmin;
-    }
 }
-
-
 .frame img {
     width: 100%;
     height: 100%;
     object-fit: fill;
 }
-
 .frame video {
     height: 100%;
     position: relative;
     display: block;
     z-index: 5;
     object-fit: inherit;
+}
+
+
+#text-content {
+    font-family: Papyrus;
+    color: white;
+    background-color: rgb(27, 26, 26);
+    width: 80%;
+    height: 50%;
+    margin-bottom: 5%;
+}
+.art-description {
+    max-height: 70%;
+    min-height: 20%;
+    background-color: rgb(27, 26, 26);
+    padding: 2%;
+    margin-bottom: 2vh;
+    overflow-y: scroll;
+    font-size: 1.4vw;
+}
+.text1 {
+    background-color: rgb(27, 26, 26);
+    max-height: 10%;
+    padding: 2%;
+    font-size: 2vw;
+}
+.text2 {
+    background-color: rgb(27, 26, 26);
+    max-height: 20%;
+    padding: 2%;
+    font-size: 1vw;
 }

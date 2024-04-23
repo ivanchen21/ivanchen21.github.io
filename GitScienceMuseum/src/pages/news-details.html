@@ -31,7 +31,7 @@
                 for (let pair of params.entries()) {
                     // console.log("Key is: " + pair[0]);
                     // console.log("Value is: " + pair[1]);
-                    id = pair[1];
+                    id = decodeURIComponent(pair[1]);
                 }
                 displayNewsDetails(id);
             }
@@ -42,29 +42,27 @@
     </head>
     <body>
         <navbar-header></navbar-header>
+
         <div class="main-content">
 
             <div class="left">
-
                 <div id="art-piece">
-                    <div class="frame">
-                    </div>
+                    <div class="frame"></div>
                 </div>
 
                 <div id="art-label">
-                    <!-- title, date_created goes below picture frame-->
                     <div class="plaque"></div>
                 </div>
-
             </div>
 
             <div class="right">
-                <div>
-                    description
+                <div id="text-content">
+                    <div class="art-description"></div>
+                    <div class="text1 d-flex justify-content-end"></div>
+                    <div class="text2"></div>
                 </div>
-                <!-- description here, photographer here-->
-                <!-- center, -->
             </div>
+
         </div>
 
 

@@ -1,4 +1,5 @@
 import { getRecent, getPopular, getUserSearch, getNewsDetails } from "../controller/nasa-library-search.js";
+import { fetchHref } from "../api/fetch-api.js";
 
 function displayNews(result){
     console.log(result);
@@ -6,7 +7,11 @@ function displayNews(result){
     // HTML for No Results
     if(result.groups.length == 0 && result.extras.length == 0){
         const content = document.getElementById("media");
-        content.innerHTML = "No Results";
+        content.innerHTML = `
+            <div class="results">
+                <h2>Sorry, we could not find any results.</h2>
+            </div>
+        `
         return;
     }
     displayTopics(result);
@@ -39,7 +44,7 @@ function displayTopics(obj){
             var grid_container = news_container.querySelector(".grid");
 
             grid_container.innerHTML +=`
-                <a href="news-details.html?nasa_id=${obj.groups[i][j].nasa_id}" class="item-${item_id++} item-content">
+                <a href="news-details.html?nasa_id=${encodeURIComponent(obj.groups[i][j].nasa_id)}" class="item-${item_id++} item-content">
                     <div id="${obj.groups[i][j].nasa_id}">
                         <img src="${obj.groups[i][j].image}" alt="image for ${obj.groups[i][j].title}">
                     </div>
@@ -90,7 +95,7 @@ function displayExtras(obj){
 
             column_container.innerHTML +=`
                 <div class="item-content">
-                    <a href="news-details.html?nasa_id=${obj.extras[i].nasa_id}">
+                    <a href="news-details.html?nasa_id=${encodeURIComponent(obj.extras[i].nasa_id)}">
                         <div id="${obj.extras[i].nasa_id}">
                             <img src="${obj.extras[i].image}" alt="image for ${obj.extras[i].title}">
                             ${image}
@@ -132,6 +137,9 @@ async function displayNewsDetails(nasa_id){
     const result = await getNewsDetails(nasa_id);
     console.log(result);
 
+    // Check if access is denied on assets
+    await fetchHref(result.href);
+
     const piece = document.getElementById("art-piece");
     const picture = piece.querySelector(".frame");
 
@@ -160,8 +168,32 @@ async function displayNewsDetails(nasa_id){
     const label = document.getElementById("art-label");
     const plaque = label.querySelector(".plaque");
     plaque.innerHTML =`${result.title}`
-    
 
+    const text_content = document.getElementById("text-content");
+    const desc = text_content.querySelector(".art-description");
+    const text1 = text_content.querySelector(".text1");
+    const text2 = text_content.querySelector(".text2");
+
+    const date = new Date(result.date_created);
+    date.setDate(date.getDate() + 1);
+
+    desc.innerHTML = `${result.description}`
+
+    text1.innerHTML = `<div><b>- ${result.photographer}</b></div>`
+
+    text2.innerHTML = `
+        <div>${date.toLocaleDateString()}</div>
+        <div>${result.center}</div>
+    `
+    if(result.keywords.length > 0){
+        text2.innerHTML += `<div class="keywords"><br></div>`
+        var keywords = text2.querySelector(".keywords");
+        
+        for(let i = 0; i < result.keywords.length - 1; i++){
+            keywords.innerHTML += `${result.keywords[i]}, `
+        }
+        keywords.innerHTML += `${result.keywords[result.keywords.length - 1]}`
+    }
 }
 
 export { displayRecent, displayPopular, displayUserSearch, displayNewsDetails };

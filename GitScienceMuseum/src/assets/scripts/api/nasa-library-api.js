@@ -29,13 +29,17 @@ async function fetchUserSearch(user_input) {
 }
 
 async function fetchByNasaID(nasa_id){
-    const url = `https://images-api.nasa.gov/search?nasa_id=${nasa_id}`;
+    // Use encoded to preserve the plus sign '%2B'
+    // console.log("Search:", nasa_id);
+    // console.log("Search:", encodeURIComponent(nasa_id));
+    const url = `https://images-api.nasa.gov/search?nasa_id=${encodeURIComponent(nasa_id)}`;
     const data = await fetchAPI(url);
     return data;
 }
 
 async function fetchAsset(nasa_id){
-    const url = `https://images-api.nasa.gov/asset/${nasa_id}`;
+    // console.log("Asset:", encodeURIComponent(nasa_id));
+    const url = `https://images-api.nasa.gov/asset/${encodeURIComponent(nasa_id)}`;
     const data = await fetchAPI(url);
     return data;
 }
