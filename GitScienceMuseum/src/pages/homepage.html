@@ -12,6 +12,9 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="../assets/styles/style.css">
         <link rel="stylesheet" href="../assets/styles/nav.css">
@@ -29,69 +32,66 @@
         <navbar-header></navbar-header>
 
         <div id="home-jumbotron-container">
-            <center id="jumbo-text" class="row g-0">
-                <h1 class="col-4">Explore</h1>
-                <h1 class="col-4">Learn</h1>
-                <h1 class="col-4">Discover</h1>
-            </center>
+            <div id="header-container" class="row g-0">
 
-            <div id="header-content-container" class="row g-0 justify-content-center">
-                <div id="welcome-container" class="col-4">
-                    <h1>Welcome to the Museum of Space Science!</h1>
-                    <p><i>Git Edition</i></p>
-                </div>
-
-                <!-- APOD API -->
-                <div id="apod-container" class="col-4">
-                    <div id="apod-body">
-                        <!-- APOD Image/Video Here -->
+                <div class="header-content justify-content-evenly">
+                    <div id="welcome-container" class="col-4 playfair-font">
+                        <h1>Welcome to the Museum of Space Science!</h1>
+                        <div class="badge">
+                            <p><i>Git Edition</i></p>                     
+                        </div>
+                    </div>
+    
+                    <div id="apod-body" class="col-4">
+                        <!-- APOD API Image/Video Here -->
                     </div>
                 </div>
+
+                <div id="scrolling-text">
+                    <marquee class="scroll"><!-- APOD Caption Here --></marquee>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="highlights-container">
+            <h2 class="playfair-font">- Exhibition Highlights -</h2>
+            
+            <div class="highlights">
+
+                <a href="news.html" class="topic">
+                    <div class="overlay"></div>
+                    <div class="left">
+                        <img src="../assets/images/news-topic.jpeg">
+                    </div>
+                    <div class="right"></div>
+                    <div class="topic-text">
+                        <h3 class="playfair-font">Aerospace Media Archive</h3>
+                        <section>
+                            Browse NASA's media resources and search through a collection of images, videos, and audio.
+                        </section>
+                    </div>
+                </a>
+
+                <a href="crater-simulator.html" class="topic">
+                    <div class="overlay"></div>
+                    <div class="left">
+                        <img src="../assets/images/crater-topic.jpeg">
+                    </div>
+                    <div class="right"></div>
+                    <div class="topic-text">
+                        <h3 class="playfair-font">Crater Testing Facility</h3>
+                        <section>
+                            Simulate meteor crashes to identify the craters impact diameter.
+                        </section>
+                    </div>
+                </a
+                >
             </div>
 
-            <marquee id="scrolling-text"><!-- APOD Caption Here --></marquee>
         </div>
 
-
-        <div class="main-container">
-            <h2>Featured Topics</h2>
-            <center>
-                <br>
-                <div class="topic">
-                    <div class="left">
-                        <img src="../assets/images/logo11.jpg">
-                    </div>
-                    <div class="right">
-                        <section>
-                            Browse the latest NASA content!
-                        </section>
-                    </div>
-                </div>
-                <br>
-                <div class="topic">
-                    <div class="left">
-                        <section>
-                            Learn about our Solar System!
-                        </section>
-                    </div>
-                    <div class="right">
-                        <img src="../assets/images/logo11.jpg">
-                    </div>
-                </div>
-                <br>
-                <div class="topic">
-                    <div class="left">
-                        <img src="../assets/images/logo11.jpg">
-                    </div>
-                    <div class="right">
-                        <section>
-                            Simulate Meteor Craters!
-                        </section>
-                    </div>
-                </div>
-                <br>
-            </center>
-        </div>
         <navbar-footer></navbar-footer>
     </body>
 </html>

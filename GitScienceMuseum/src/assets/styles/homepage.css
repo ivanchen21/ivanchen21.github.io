@@ -1,74 +1,76 @@
 #home-jumbotron-container {
-    background-image: url(../images/background2.jpeg);
+    background-image: url(../images/star-background.webp);
     background-size: cover;
+    height: calc(100vh - 200px);
+    min-height: 700px;
+    max-height: 100vh;
 }
 
-#jumbo-text {
-    display:flex;
-    justify-content: center;
-    align-items: center;
+@media only screen and (max-width: 800px) {
+    #home-jumbotron-container {
+        background-image: url(../images/star-background.webp);
+        background-size: cover;
+        height: calc(100vh - 200px);
+        min-height: 300px;
+        max-height: 400px;
+    }
 }
 
-#jumbo-text h1 {
-    font-size: 4.5vw; /* Viewport width 64px */
-    color: white;
-    font-weight: bolder;
-    margin-top:20px;
+#header-container {
+    height: 100%;
+    display: flex;
 }
 
-
-#header-content-container {
-    margin-top: 2%;
-    display:flex;
-    align-items: end;
+.header-content {
+    height: 80%;
+    display: flex;
+    align-items: flex-end;
 }
 
 #welcome-container {
+    width: 36%;
     background-color: black;
     color: white;
-    margin: 30px;
-    margin-bottom: 47.5px;
-    padding: 15px;
-    height: 40%;
+    margin: 1%;
+    padding: 1.5%;
 }
 
 #welcome-container h1 {
     font-size: 4.3vw;
 }
 
+#welcome-container .badge {
+    display: flex;
+    justify-content: flex-end;
+}
+
 #welcome-container p {
     background-color: #443dff;
     color: #ffda1f;
-    float: right;
     width: fit-content;
-    margin: 10px;
-    margin-right: 20px;
-    padding: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 30px;
+    margin: 1%;
+    padding: 2%;
+    border-radius: 40px;
     letter-spacing: 1.5px;
     font-weight: bold;
     font-size: 1.2vw;
-}
-
-#apod-container {
-    margin: 30px;
-    padding: 10px;
-    height: auto;
+    font-family: "Outfit";
 }
 
 #apod-body {
+    width: 40%;
     background-color: white;
-    margin: 10px;
-    padding: 10px;
+    margin: 1%;
+    padding: 1%;
     height: 100%;
+    max-height: 80%;
 }
 
 #apod-body img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    max-height: 100%;
+    object-fit: fill;
 }
 #apod-body iframe {
     width: 100%;
@@ -78,37 +80,96 @@
 }
 
 #scrolling-text {
+    height: 20%;
+    display: flex;
+    align-items: center;
+}
+#scrolling-text .scroll {
     background-color: black;
     color: white;
+    padding: 0.5%;
     font-size: 1.5vw;
-    margin-bottom: 15px;
-    padding: 5px;
+    text-align: center;
 }
 
-.main-container {
-    background-color: whitesmoke;
+
+.highlights-container {
+    background-color: rgb(255, 255, 255);
+    padding: 2%;
+}
+.highlights-container h2 {
+    padding: 4%;
+    font-size: 3vw;
+    text-align: center;
+}
+.highlights {
+    height: 100%;
+    display: flex;
 }
 
-.main-container .topic {
+.highlights .topic {
     color: white;
     background-color: black;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 325px;
+    margin: 2%;
+    position: relative;
+    transition: 0.3s;
+}
+.highlights .topic:hover {
+    transform: scale(.98);
+    opacity: 0.95;
+}
+.overlay {
+    position: absolute;
+    left: 10%;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0,0,0,1));
+}
+
+.topic .left {
     width: 60%;
-    border: solid red 5px;
+    height: 100%;
 }
-
-.main-container .topic .left {
-    width: 50%;
+.topic .right {
+    width: 40%;
+    height: 100%;
 }
-
-.main-container .topic .right {
-    width: 50%;
-}
-
-.main-container img {
+.left img {
     width: 100%;
     height: 100%;
 }
+.topic-text {
+    position: absolute;
+    left: 40%;
+    top: 0;
+    width: 60%;
+    height: 100%;
+    padding: 5%;
+}
+.topic-text h3 {
+    font-size: 2.5vw;
+    padding: 5%;
+}
+.topic-text section {
+    font-size: 1.5vw;
+    padding: 5%;
+}
 
+@media only screen and (max-width: 800px) {
+    .highlights .topic {
+        color: white;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 75%;
+        height: 175px;
+        margin: 2%;
+    }
+}

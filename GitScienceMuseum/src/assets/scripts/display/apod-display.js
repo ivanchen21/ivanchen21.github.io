@@ -12,7 +12,8 @@ async function displayAPOD() {
         apodBody.innerHTML = `<iframe src="${result.picture}&autoplay=1&mute=1&loop=1"></iframe>`
     }
     const caption = document.getElementById("scrolling-text");
-    caption.innerHTML = result.caption;
+    const marquee = caption.querySelector(".scroll");
+    marquee.innerHTML = result.caption;
 }
 
 export { displayAPOD };

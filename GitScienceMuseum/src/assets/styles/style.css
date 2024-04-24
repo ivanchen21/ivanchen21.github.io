@@ -1,12 +1,17 @@
 html {
-    height: 100%;
     background-color: black;
 }
 
-/* Change default font */
 body {
+    background-color: white;
     font-family: "Outfit", sans-serif;
     font-weight: 400;
     font-style: normal;
-    height: 100%;
 }
+
+.playfair-font {
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+  

@@ -12,7 +12,7 @@ class Header extends HTMLElement {
             <div class="container-fluid">
                 <a class="navbar-brand" href="homepage.html">
                     <img src="../assets/images/logo11.jpg" alt="space science museum logo" class="d-inline-block align-text-top rounded-pill">
-                    <center><strong>GitScience</strong></center>
+                    <center class="playfair-font"><strong>GitScience</strong></center>
                 </a>
                 <button
                     class="navbar-toggler"
@@ -39,8 +39,8 @@ class Header extends HTMLElement {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="solar-system.html">
-                                Solar System
+                            <a class="nav-link" aria-current="page" href="crater-simulator.html">
+                                Crater Sim
                             </a>
                         </li>
                         <li class="nav-item">

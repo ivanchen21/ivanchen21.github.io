@@ -60,7 +60,7 @@ function displayExtras(obj){
     if(obj.extras.length){
         content.innerHTML +=`
             <div id="extras-container" class="row g-0" data-masonry='{"percentPosition": true }'>
-                <center><h1><b>Gallery</b></h1></center>
+                <center><h1 class="playfair-font"><b>Gallery</b></h1></center>
             </div>
         `
         var extras_container = document.getElementById("extras-container");
