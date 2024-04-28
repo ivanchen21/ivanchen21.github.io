@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="../assets/styles/crater-facility.css">
         
         <script src="../assets/components/nav.js" type="text/javascript"></script>
+        <!-- PRE -->
         <script async type="module">
             import { displayNEO } from "../assets/scripts/display/neo-display.js";
             window.addEventListener("load", displayNEO);
@@ -41,6 +42,36 @@
             const impactor_velocity = document.getElementById("impactor-velocity");
             impactor_diameter.addEventListener("input", limitNumberInput);
             impactor_velocity.addEventListener("input", limitNumberInput);
+
+        </script>
+
+        <!-- POST -->
+        <script async type="module">
+            import { displayCrater} from "../assets/scripts/display/crater-map.js"
+
+            function fire() {
+                // console.log("fire");
+                displayCrater();
+            }
+
+            function reset() {
+                let form = document.getElementById("crater-form");
+                form.reset();
+            }
+
+            function clear() {
+                console.log("clear");
+            }
+
+
+            const fire_button = document.getElementById("fire-button");
+            const reset_button = document.getElementById("reset-button");
+            const clear_button = document.getElementById("clear-button");
+
+            fire_button.addEventListener("click", fire);
+            reset_button.addEventListener("click", reset);
+            clear_button.addEventListener("click", clear);
+
 
         </script>
     </head>
@@ -99,8 +130,8 @@
         </div>
         
         <div id="neo-examples">
-            <br><br><br><br>
-            <h2 id="element-count">Number of Asteroids nearby Earth: </h2>
+            <br><br><br>
+            <h2 id="element-count">Asteroids nearby Earth Today: </h2>
             <div id="meteors" class="justify-content-evenly">
             </div>
         </div>
@@ -117,19 +148,19 @@
                                 <h6>Impactor Density</h6>
                                 <hr>
 
-                                <input type="radio" id="ice" name="impactor-density">
+                                <input type="radio" id="ice" name="impactor-density" value="1000">
                                 <label for="ice">Ice Comet</label>
                                 <br>
-                                <input type="radio" id="porous" name="impactor-density">
+                                <input type="radio" id="porous" name="impactor-density" value="1500">
                                 <label for="porous">Porous Rock</label>
                                 <br>
-                                <input type="radio" id="dense" name="impactor-density">
+                                <input type="radio" id="dense" name="impactor-density" value="3000" checked>
                                 <label for="dense">Dense Rock</label>
                                 <br>
-                                <input type="radio" id="iron" name="impactor-density" checked>
+                                <input type="radio" id="iron" name="impactor-density" value="8000">
                                 <label for="iron">Iron</label>
                                 <br>
-                                <input type="radio" id="gold" name="impactor-density">
+                                <input type="radio" id="gold" name="impactor-density" value="20000">
                                 <label for="gold">Gold</label>
                             </div>
 
@@ -138,13 +169,13 @@
                                 <h6>Target Density</h6>
                                 <hr>
 
-                                <input type="radio" id="water" name="target-density">
+                                <input type="radio" id="water" name="target-density" value="1000">
                                 <label for="water">Water</label>
                                 <br>
-                                <input type="radio" id="sedimentary" name="target-density" checked>
+                                <input type="radio" id="sedimentary" name="target-density" value="2500" checked>
                                 <label for="sedimentary">Sedimentary Rock</label>
                                 <br>
-                                <input type="radio" id="crystalline" name="target-density">
+                                <input type="radio" id="crystalline" name="target-density" value="2750">
                                 <label for="crystalline">Crystalline Rock</label>
                             </div>
                         </section>
@@ -163,7 +194,7 @@
                         <!-- Meteor Velocity -->
                         <section>
                             <div class="crater-label justify-content-between"><h6>Velocity (km/s)</h6><p>1 - 200</p></div>
-                            <input type="number" id="impactor-velocity" name="meteor-velocity" value="50" min="1" max="200">
+                            <input type="number" id="impactor-velocity" name="meteor-velocity" value="25" min="1" max="200">
                             <output>kilometers per second</output>
                         </section>
 
@@ -171,25 +202,25 @@
 
                         <!-- Angle of Impact -->
                         <section>
-                            <div class="crater-label justify-content-between"><h6>Angle of Impact</h6><p>0 - 90</p></div>
-                            <input type="range" id="angle" name="angle" value="45" min="0" max="90" oninput="this.nextElementSibling.value = this.value">
-                            <output>45</output>
+                            <div class="crater-label justify-content-between"><h6>Angle of Impact</h6><p>1 - 90</p></div>
+                            <input type="range" id="angle" name="angle" value="45" min="1" max="90" oninput="this.nextElementSibling.value = this.value">
+                            <output id="angle-output">45</output>
                         </section>
                     </form>
 
                     <br><br>
 
                     <div class="form-buttons d-flex justify-content-evenly">
-                        <button>FIRE</button>
-                        <button>RESET</button>
+                        <button id="fire-button">FIRE</button>
+                        <button id="reset-button">RESET</button>
                     </div>
 
                     <br>
-                    <center><button>CLEAR CRATERS</button></center>
+                    <center><button id="clear-button">CLEAR CRATERS</button></center>
 
             </div>
 
-            <div class="map">
+            <div id="map-container">
 
             </div>
         </div>

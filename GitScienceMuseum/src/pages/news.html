@@ -46,7 +46,8 @@
                 let filter_form = document.getElementById("filter-form").elements;
 
                 let query = Array.from(query_form);
-                let filter = Array.from(filter_form).filter(element => element.type != "output");
+                let filter = Array.from(filter_form).filter(element => element.tagName == "INPUT");
+                //console.log(filter);
                 // query.forEach((element) =>
                 //     console.log(element.name + " " + element.value)
                 // );

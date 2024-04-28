@@ -2,7 +2,7 @@ import { getRecent, getPopular, getUserSearch, getNewsDetails } from "../control
 import { fetchHref } from "../api/fetch-api.js";
 
 function displayNews(result){
-    console.log(result);
+    // console.log(result);
 
     // HTML for No Results
     if(result.groups.length == 0 && result.extras.length == 0){
@@ -135,7 +135,7 @@ async function displayUserSearch(input){
 // Passes data to different page using url parameter
 async function displayNewsDetails(nasa_id){
     const result = await getNewsDetails(nasa_id);
-    console.log(result);
+    // console.log(result);
 
     // Check if access is denied on assets
     await fetchHref(result.href);
