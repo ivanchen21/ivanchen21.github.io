@@ -1,3 +1,8 @@
+// https://impact.ese.ic.ac.uk/ImpactEarth/cgi-bin/crater.cgi
+// https://impact.ese.ic.ac.uk/ImpactEarth/ImpactEffects/effects.pdf
+// https://www.purdue.edu/impactearth/
+// https://neal.fun/asteroid-launcher/
+
 /* --------- Densities (kg/m^3) ---------  */
 // ice = 1000
 // porous = 1500
